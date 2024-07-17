@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body{
+  width: 100%;
+  height: 100vh;
+  background-color:  #18171F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* App.css */
+.custom-range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  background-color: #18171F;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity .15s ease-in-out;
+}
+
+.custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 25px;
+  background: white;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-top: -8px;
+  box-shadow: 0 0 0.3 black;
+}
+
+.custom-range::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: #A4FFAF;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.custom-range::-ms-thumb {
+  width: 15px;
+  height: 15px;
+  background: #A4FFAF;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.custom-range::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  background: #A4FFAF;
+  border-radius: 25px;
+}
+
+.custom-range::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  background: #A4FFAF;
+  border-radius: 25px;
+}
+
+.custom-range::-ms-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
