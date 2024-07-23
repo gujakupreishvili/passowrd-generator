@@ -1,96 +1,12 @@
 import { useState } from "react";
 import { FaRegCopy } from "react-icons/fa6";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export default function Content() {
-  const uppercase = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
-  ];
-  const lowercase = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-  ];
-  const symbols = [
-    "!",
-    "#",
-    "$",
-    "%",
-    "&",
-    "'",
-    "(",
-    ")",
-    "*",
-    "+",
-    ",",
-    "-",
-    ".",
-    "/",
-    ":",
-    ";",
-    "<",
-    "=",
-    ">",
-    "?",
-    "@",
-    "[",
-    "]",
-    "^",
-    "_",
-    "`",
-    "{",
-    "|",
-    "}",
-    "~",
-  ];
-  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+  const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const lowercase = "abcdefghijklmnopqrstuvwxyz".split("");
+  const symbols = "!#$%&'()*+,-./:;<=>?@[\\]^_`{|}~".split("");
+  const numbers = "1234567890".split("");
 
   const [length, setLength] = useState<number>(0);
   const [checkUppercase, setCheckUppercase] = useState<boolean>(false);
@@ -99,6 +15,7 @@ export default function Content() {
   const [checkNumbers, setCheckNumbers] = useState<boolean>(false);
   const [generatedPassword, setGeneratedPassword] =
     useState<string>("P4$5W0rD!");
+  const [copied, setCopied] = useState<boolean>(false);
 
   const handleCheckboxClick = (
     setter: React.Dispatch<React.SetStateAction<boolean>>
@@ -122,6 +39,7 @@ export default function Content() {
     }
 
     setGeneratedPassword(password);
+    setCopied(false); // Reset copied state when generating a new password
   };
 
   const activeCount = [
@@ -147,8 +65,11 @@ export default function Content() {
         </p>
         <div className="bg-[#24232C] w-[330px] flex items-center justify-between py-[12px] px-[15px]">
           <p className="text-white text-[24px]">{generatedPassword}</p>
-          <FaRegCopy className="text-[#A4FFAF] w-[18px] h-[20px]" />
+          <CopyToClipboard text={generatedPassword} onCopy={() => setCopied(true)}>
+            <FaRegCopy className="text-[#A4FFAF] w-[18px] h-[20px] cursor-pointer" />
+          </CopyToClipboard>
         </div>
+        {/* {copied && <p className="text-[#A4FFAF] text-center mt-2">Copied to clipboard!</p>} */}
         <div className="flex flex-col px-[15px] mt-[20px] bg-[#24232C]">
           <div className="flex items-center justify-between pt-[20px] pb-[15px]">
             <p className="text-[16px] text-white">Character Length</p>
@@ -212,7 +133,7 @@ export default function Content() {
             </div>
           </div>
           <button
-            className="mt-[20px] py-[10px] bg-[#A4FFAF] text-[#24232C] font-bold"
+            className="my-[20px] py-[10px] bg-[#A4FFAF] text-[#24232C] font-bold"
             onClick={randomPassword}
           >
             Generate Password
